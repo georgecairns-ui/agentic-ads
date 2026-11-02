@@ -1,4 +1,4 @@
-# Marketing notes: Ads OS
+# Marketing notes: Agentic Ads
 
 ## In one sentence
 

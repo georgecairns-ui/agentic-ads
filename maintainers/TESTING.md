@@ -1,4 +1,4 @@
-# Testing Ads OS
+# Testing Agentic Ads
 
 How to test the whole thing as a customer would, without touching the repo. Also follow section 5 of `SHARED-V3-CHANGES.md` and the testing sections of `SHARED-V4-CHANGES.md`, `SHARED-V5-CHANGES.md`, `SHARED-V6-CHANGES.md` and `SHARED-V7-CHANGES.md` for the shared parts.
 
@@ -20,7 +20,7 @@ What the tests must cover, so a future change can't quietly break a rule:
 
 - **`rangeTotals`**: spend, results, value, clicks and impressions for a date range, a platform and a campaign; an empty range gives 0, not an error.
 - **`costPerResult`**: `spend / results`, and `null` when results is 0.
-- **`roas`**: from the platform's `value` when it is there ("reported"); otherwise from `results x settings.result.worth x settings.result.closeRate` ("estimated"); `null` when neither exists or spend is 0. The real return from Pipeline OS wins (`wins`), labelled "from customers you've won".
+- **`roas`**: from the platform's `value` when it is there ("reported"); otherwise from `results x settings.result.worth x settings.result.closeRate` ("estimated"); `null` when neither exists or spend is 0. The real return from Agentic Pipeline wins (`wins`), labelled "from customers you've won".
 - **`light`**: all 4 states: green at or under target, amber up to 25% over (and exactly 25% over), red beyond that or with no results and spend at least 2 x target, and grey "Too early to say" with no results and spend under 2 x target or under 7 days of figures. A platform target in `platformTargets` beats the overall one.
 - **`weeks`** and **`weekStart`**: weeks start on `settings.weekStarts` (Monday and Sunday), gaps give empty weeks, and a day just after midnight in summer is in the right week.
 - **`pace`**: spend so far this month against the budget, the projected month end (spend so far / days elapsed x days in the month), and a month with no budget.
@@ -43,7 +43,7 @@ Never test inside the repo: setup writes real details into it. Build the release
 bash maintainers/make-release.sh
 ```
 
-Then unzip `dist/ads-os.zip` into a test location, for example `Documents/Ads OS test`. Each test run starts from a fresh unzip. Then check the release script itself refuses what it should, on a scratch copy of the repo, by adding each of these and running it (each must stop with a plain message):
+Then unzip `dist/agentic-ads.zip` into a test location, for example `Documents/Agentic Ads test`. Each test run starts from a fresh unzip. Then check the release script itself refuses what it should, on a scratch copy of the repo, by adding each of these and running it (each must stop with a plain message):
 
 - a non-empty `builds` list in `apps/ads/data/ads.json`,
 - a filled-in `context/ads.md`,
@@ -77,7 +77,7 @@ The `.ps1` can't be run on a Mac: to check on Windows with PowerShell 5.1, the s
 
 ## 4. Page checks
 
-Run the app (`node apps/server/server.js` or `python3 apps/server/server.py`), open http://localhost:4747, go into Ads OS, and check:
+Run the app (`node apps/server/server.js` or `python3 apps/server/server.py`), open http://localhost:4747, go into Agentic Ads, and check:
 
 - **One page**: the sidebar shows one item, "Ads". Under the top bar is the rail: Overview | Campaigns | New campaigns | This week (New campaigns shows its count), a Health check button with a coloured dot, and the Settings gear. Each view has its own address (`#overview`, `#campaigns`, `#builds`, `#week`, `#health`) and Back and Forward move between them; the keys 1 to 5 do too. Nothing scrolls sideways from 320 to 2560 pixels.
 - **Fresh install** (empty data file): Overview and the first Home box show "Let's set up your ads" with the `/setup` line and a copy button. Every other empty page says what will fill it. With platforms on and no figures: "No figures yet. Press Refresh figures, or drop a report export into files/04-marketing/ads/exports and say: update my ads." Nothing mentions a demo.
@@ -101,13 +101,13 @@ Run the app (`node apps/server/server.js` or `python3 apps/server/server.py`), o
 
 ## 6. The 8 background jobs, with a stand-in `claude`
 
-Point `TLOS_CLAUDE` at a stand-in script that follows the job prompts without using real Claude (see Task List OS's own stand-in for the pattern). For each job, trigger it from the app and check:
+Point `TLOS_CLAUDE` at a stand-in script that follows the job prompts without using real Claude (see Agentic Task List's own stand-in for the pattern). For each job, trigger it from the app and check:
 
 - **`update-my-ads`**: the stand-in writes `campaigns` (each with its `ads`: words and status), `figures` (one row per campaign per day, the same campaign and date replaced rather than doubled, no totals anywhere), `adFigures` (one row per ad per day, also replaced, never added into `figures`) and `imports`, saves an ad's picture into `apps/ads/data/media/` only when the stand-in's connection hands one over (with an `m-` file name), and leaves the ad as words only otherwise, sets `platforms.<key>.lastRefresh`, and touches nothing else. Run it twice: no doubles.
 - **`build-a-campaign`**: fills the new build (a build with a `request` of kind `write` and no ad words), status `draft`, 2 or 3 ads within `AD.LIMITS`, a budget inside the caps, a season, a why, checks and a `prediction` (`basis: "plan"`, with assumptions), then clears `request`. It writes nothing past `draft`. For a build with `fromCampaignId` and a `brief`, it follows the brief: same audience when asked, the dates and budget the owner gave (still inside the caps), kept, fresh or mixed ad words as asked.
 - **`write-campaign`**: changes only the draft with the request, keeps the owner's edits, clears `request`.
 - **`build-in-account`**: with a stand-in that records every call it makes: only create calls, each with status paused, then read calls; never an activate, update, pause, re-budget or delete call; `refs` filled, `status: "in-account"`, `builtAt` set. With the stand-in made to return one object as active on read-back: it stops, makes no further call, sets the build back to `approved`, and says so. A build with `refs.campaignId` already set is refused. A failing budget or seasonal guard is refused and changes nothing. On Google: the CSV has every status Paused and every headline within 30 characters and every description within 90, and the build sheet exists.
-- **`send-to-task-list`**: only runs when `apps/installed.json` lists `task-list`, after Approve on a suggestion and after a successful `build-in-account`. It writes a suggested task for each approved suggestion and each `in-account` or `ready-to-import` build with no `taskId`, records the ids, and sends nothing twice. Without Task List OS the app never asks for it.
+- **`send-to-task-list`**: only runs when `apps/installed.json` lists `task-list`, after Approve on a suggestion and after a successful `build-in-account`. It writes a suggested task for each approved suggestion and each `in-account` or `ready-to-import` build with no `taskId`, records the ids, and sends nothing twice. Without Agentic Task List the app never asks for it.
 - **`analyse-campaign`**: for a campaign with `request.kind = "analyse"`, adds one `analyses` entry at the front (words only, every number in it in `report.js campaign <id>`), sets a `prediction` with assumptions only when the campaign has none (`basis: "analysis"`, `from` today) and never overwrites an existing one, adds up to 3 suggestions, clears `request`, and makes no ad account call that changes anything.
 - **`make-account-change`** is not a background job: `POST /api/claude/run/ads/make-account-change` must answer 404. It runs on screen: after Yes, check approvals.json holds the entry and the Open Claude step shows (link and copy button). With a stand-in that records every call it makes, for a `requested` Meta `switch-on`, `pause` and `budget` action each: runs `report.js action <id>` first; makes exactly 1 changing call; reads back; sets `doing`, then `done` with `readBack` (for a budget, equal to `budgetTo`) and `doneAt`; updates only that campaign or ad and `activity`. A `switch-on` of a build also sets the build `live` with `switchedOnAt`, copies its prediction to the campaign and sets `buildId`. With the check printing BLOCKED: no changing call, status `failed`, a plain `note`. With the read-back not matching: status `failed` and the note says what it found, with no second changing call. A `google` action, a delete, or a status that isn't `requested`: no call at all. Two requested actions: each handled once, in order.
 - **`how-did-the-ads-do`**: this week's summary is added or replaced (one per `weekStart`), and every number in it appears in `report.js week`.
@@ -126,7 +126,7 @@ Search the whole kit (`apps/ads/`, `.claude/skills/` apart from the installed cl
 
 ## 8. Menu and locked-tool panel
 
-As `SHARED-V3-CHANGES.md` section 5 describes: on a scratch copy, the sidebar shows Home, Ads OS as an open dropdown with its one page (Ads, carrying the count of things waiting on the owner), and the other 6 tools locked under "More tools" in catalogue order. Folding the dropdown shows the total waiting and the choice is remembered. Each locked tool opens the panel with the right tracking on its button link; Escape and a click outside close it; it works by keyboard and at phone width. `showMoreTools: false` in `catalogue.json` hides the locked tools completely. The `ads` entry reads as in `SHARED-CATALOGUE-RENAME.md`, `proposals` reads Proposal OS and `file-finder` is gone.
+As `SHARED-V3-CHANGES.md` section 5 describes: on a scratch copy, the sidebar shows Home, Agentic Ads as an open dropdown with its one page (Ads, carrying the count of things waiting on the owner), and the other 6 tools locked under "More tools" in catalogue order. Folding the dropdown shows the total waiting and the choice is remembered. Each locked tool opens the panel with the right tracking on its button link; Escape and a click outside close it; it works by keyboard and at phone width. `showMoreTools: false` in `catalogue.json` hides the locked tools completely. The `ads` entry reads as in `SHARED-CATALOGUE-RENAME.md`, `proposals` reads Agentic Proposals and `file-finder` is gone.
 
 ## 9. Setup, as the customer's Claude
 
@@ -142,14 +142,14 @@ On a fresh unzip, run `/setup` as if you were the customer's Claude, with a made
 - Nothing in the folder ends up containing a password, a token or a customer list.
 - Quitting half way and typing `/setup` again carries on from `setup/progress.md`.
 
-## 10. Attach to a scratch Task List OS (and Pipeline OS)
+## 10. Attach to a scratch Agentic Task List (and Agentic Pipeline)
 
-Follow `ATTACHING.md` on a scratch copy of Task List OS, then check:
+Follow `ATTACHING.md` on a scratch copy of Agentic Task List, then check:
 
-- Both tools show as dropdowns in the sidebar; Home offers both tools' boxes (this tool's start off, in the hidden list, per the shared rule); nothing in Task List OS broke; setup didn't ask what the business does a second time.
-- Approving a suggestion, then `what-should-i-change` (or the job), adds a suggested task to Task List OS (for a Google suggestion, "Pause the Summer whitening ad in Google Ads"; a Meta pause or budget suggestion becomes an account change only when the owner presses its button in the app), and `my-ads-check-in` adds "Switch on: <build>" for each build waiting to be switched on, each with `source.tool` set to `ads`, a `source.id` that matches the suggestion or the build, `suggested: true` and `addedBy: "claude"`. They show on its Review page with a New tag and need a click. Running either twice adds nothing twice. A task for a suggestion that isn't approved, or a build that is live, is never added.
-- With Pipeline OS also attached: a deal moved to `won` whose source names an ad becomes one entry in `wins` once `update-my-ads` runs, never twice, and no deal record is changed. A Meta lead (from a test lead form, **to check** whether the connection returns lead details) becomes one suggested deal in Pipeline OS's Review, never twice, and no lead detail appears anywhere in `ads.json`.
-- With Money View OS attached: it reads `figures` and `settings.monthlyBudget` itself, and Ads OS writes nothing into it.
+- Both tools show as dropdowns in the sidebar; Home offers both tools' boxes (this tool's start off, in the hidden list, per the shared rule); nothing in Agentic Task List broke; setup didn't ask what the business does a second time.
+- Approving a suggestion, then `what-should-i-change` (or the job), adds a suggested task to Agentic Task List (for a Google suggestion, "Pause the Summer whitening ad in Google Ads"; a Meta pause or budget suggestion becomes an account change only when the owner presses its button in the app), and `my-ads-check-in` adds "Switch on: <build>" for each build waiting to be switched on, each with `source.tool` set to `ads`, a `source.id` that matches the suggestion or the build, `suggested: true` and `addedBy: "claude"`. They show on its Review page with a New tag and need a click. Running either twice adds nothing twice. A task for a suggestion that isn't approved, or a build that is live, is never added.
+- With Agentic Pipeline also attached: a deal moved to `won` whose source names an ad becomes one entry in `wins` once `update-my-ads` runs, never twice, and no deal record is changed. A Meta lead (from a test lead form, **to check** whether the connection returns lead details) becomes one suggested deal in Agentic Pipeline's Review, never twice, and no lead detail appears anywhere in `ads.json`.
+- With Agentic Money View attached: it reads `figures` and `settings.monthlyBudget` itself, and Agentic Ads writes nothing into it.
 - With none of those attached: everything above is skipped quietly, with no error.
 
 ## 11. Helper: Node and Python behave the same

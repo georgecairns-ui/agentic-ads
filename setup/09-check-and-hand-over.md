@@ -40,7 +40,7 @@ Then tell them, briefly:
 
 ## 3. No scheduled run
 
-Ads OS doesn't set up a scheduled check-in. No ad account tool is pre-approved, not even one that only reads, so a run while they're away would stop at its first question. Don't offer one. Tell them in one line that their figures come in when they say "update my ads" or press **Refresh figures**, and that Claude checks each connection then.
+Agentic Ads doesn't set up a scheduled check-in. No ad account tool is pre-approved, not even one that only reads, so a run while they're away would stop at its first question. Don't offer one. Tell them in one line that their figures come in when they say "update my ads" or press **Refresh figures**, and that Claude checks each connection then.
 
 ## 4. Mark setup complete
 

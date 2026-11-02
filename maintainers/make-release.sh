@@ -2,26 +2,26 @@
 #
 # MAKE RELEASE
 # ------------
-# Builds dist/ads-os.zip: a clean copy of the kit for customers to download.
+# Builds dist/agentic-ads.zip: a clean copy of the kit for customers to download.
 #
-# Run it from the ads-os folder with:   bash maintainers/make-release.sh
+# Run it from the agentic-ads folder with:   bash maintainers/make-release.sh
 #
 # What it does:
 #   1. Checks the files that ship are still blank templates, so nobody's real ads data, business notes,
 #      reports, campaign files, setup progress, photos and videos, or installed claude-ads files can go out
 #      by mistake. Stops if not.
-#   2. Copies the kit into a temporary folder called "Ads OS", leaving out this
+#   2. Copies the kit into a temporary folder called "Agentic Ads", leaving out this
 #      maintainers folder, git history, old builds, backups and computer clutter.
 #   3. Checks the copy is complete and every data and settings file is valid, and syntax-checks the app's scripts.
-#   4. Zips it as dist/ads-os.zip, replacing any older one.
+#   4. Zips it as dist/agentic-ads.zip, replacing any older one.
 
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DIST="$ROOT/dist"
-STAGE="$(mktemp -d "${TMPDIR:-/tmp}/ads-os-build.XXXXXX")"
+STAGE="$(mktemp -d "${TMPDIR:-/tmp}/agentic-ads-build.XXXXXX")"
 trap 'rm -rf "$STAGE"' EXIT
-NAME="Ads OS"
+NAME="Agentic Ads"
 OUT="$STAGE/$NAME"
 
 fail() { echo "RELEASE STOPPED: $1" >&2; exit 1; }
@@ -169,7 +169,7 @@ if str(toolkit.get("sharedVersion")) != shared_version:
     problems.append(f"toolkit.json sharedVersion is {toolkit.get('sharedVersion')!r} but apps/shared/VERSION says {shared_version}: change them together")
 
 # Shared parts are identical in every tool, so they must not name one. No file may use the old start-up names,
-# and no message in the scripts, the helper or the shared page code may say "Ads OS" (they read the tool's name from toolkit.json)
+# and no message in the scripts, the helper or the shared page code may say "Agentic Ads" (they read the tool's name from toolkit.json)
 skip_dirs = {".git", "dist", "maintainers", "node_modules"}
 for f in sorted(root.rglob("*")):
     if not f.is_file() or skip_dirs & set(f.relative_to(root).parts) or f.suffix in (".png", ".jpg", ".woff2", ".zip", ".gz", ".ico"):
@@ -183,7 +183,7 @@ for f in sorted(root.rglob("*")):
     # The give-up checks apply only to the files that connect apps (elsewhere "move on" or "skip it" is harmless)
     connect_scope = (re.fullmatch(r"setup/0[2-4][^/]*\.md", rel) or re.fullmatch(r"setup/[^/]*(connect|check-ins|make-it-automatic)[^/]*\.md", rel)
                      or re.fullmatch(r"setup/connections/[^/]+\.md", rel) or rel.startswith(".claude/skills/connect-a-tool/")
-                     # Ads OS connects Meta Ads and Google Ads in its own step 3
+                     # Agentic Ads connects Meta Ads and Google Ads in its own step 3
                      or rel == "setup/ads-02-where-your-ads-are.md")
     if v13_scope and f.suffix == ".md" and rel != "setup/connections/xero-drafts.md":
         give_up = (
@@ -205,9 +205,9 @@ for f in sorted(root.rglob("*")):
         if old in txt:
             problems.append(f"{rel} uses the old name {old} (it is now open-the-app / start-app, the same in every tool)")
     # setup/scripts/ excludes the install-claude-ads scripts (this tool's own, not shared). The shared comment's
-    # own illustration (`for example "Ads OS"`) is left out, since it uses Ads OS as the example in every tool.
-    if re.match(r"setup/scripts/(?!install-claude-ads)|apps/server/|apps/shared/js/", rel) and re.search(r"Ads OS", re.sub(r'for example "Ads OS"', "", txt)):
-        problems.append(f"{rel} names a tool (Ads OS): shared parts read the name from toolkit.json")
+    # own illustration (`for example "Agentic Ads"`) is left out, since it uses Agentic Ads as the example in every tool.
+    if re.match(r"setup/scripts/(?!install-claude-ads)|apps/server/|apps/shared/js/", rel) and re.search(r"Agentic Ads", re.sub(r'for example "Agentic Ads"', "", txt)):
+        problems.append(f"{rel} names a tool (Agentic Ads): shared parts read the name from toolkit.json")
 for p in problems:
     print("  - " + p, file=sys.stderr)
 sys.exit(1 if problems else 0)
@@ -226,14 +226,14 @@ rsync -a \
 find "$OUT" -mindepth 2 -type d -name .claude -empty -prune -exec rm -rf {} +
 
 # ---------- 3. Checks ----------
-for f in "START-HERE.md" "CLAUDE.md" "LICENSE" "README.md" "Open Ads OS.html" "apps/ads/index.html" "apps/ads/data/ads.json" "apps/ads/data/approvals.json" "apps/ads/menu.json" "apps/ads/home-boxes.js" "apps/ads/claude-jobs.json" "apps/ads/CLAUDE.md" "apps/ads/ATTACH-CLAUDE.md" "apps/ads/app/app.js" "apps/ads/app/app.css" "apps/ads/app/views.css" "apps/ads/app/model.js" "apps/ads/app/report.js" "apps/ads/app/components.js" "apps/ads/app/charts.js" "apps/ads/app/drawer.js" "apps/ads/app/media.js" "apps/ads/app/settings.js" "apps/ads/app/view-overview.js" "apps/ads/app/view-campaigns.js" "apps/ads/app/view-builds.js" "apps/ads/app/view-week.js" "apps/ads/app/view-health.js" "context/ads.md" "setup/progress.md" "setup/05-get-to-know-the-business.md" "setup/ads-01-install-claude-ads.md" "setup/ads-02-where-your-ads-are.md" "setup/ads-03-your-customer.md" "setup/ads-04-budget-and-results.md" "setup/ads-05-first-look.md" "setup/09-check-and-hand-over.md" "setup/scripts/install-claude-ads.sh" "setup/scripts/install-claude-ads.ps1" "setup/connections/meta-ads.md" "setup/connections/google-ads.md" "files/04-marketing/ads/README.md" "files/04-marketing/ads/exports/README.md" "skills-to-upload/README.md" ".claude/skills/README.md" ".claude/settings.json" ".claude/skills/build-a-campaign/references/campaign-basics.md" ".claude/skills/build-in-account/references/connections.md" ".claude/skills/build-in-account/references/google-ads-editor.md" ".claude/skills/update-my-ads/references/exports.md" "setup/scripts/save-key.sh" "setup/scripts/start-app.sh" "apps/server/server.js" "apps/server/server.py" "setup/connections/README.md" "toolkit.json" "ATTACHING.md" "apps/installed.json" "apps/shared/catalogue.json" "apps/shared/VERSION" "apps/shared/sidebar.css" "apps/shared/js/sidebar.js" "apps/shared/js/theme.js" "apps/shared/js/braindump.js" "apps/shared/js/connections.js" "apps/shared/js/connections-box.js" ".claude/skills/sort-brain-dump/SKILL.md" "apps/shared/images/claude-icon.png" "apps/home/index.html" "apps/home/home.js" "apps/home/home.css" "apps/shared/fonts/Figtree-Variable.woff2" "docs/CUSTOMISING.md" "docs/PRIVACY-AND-SAFETY.md" "setup/as-installed/README.md" ".claude/skills/get-updates/SKILL.md" ".claude/skills/open-the-app/SKILL.md" ".claude/skills/match-my-brand/SKILL.md"; do
+for f in "START-HERE.md" "CLAUDE.md" "LICENSE" "README.md" "Open Agentic Ads.html" "apps/ads/index.html" "apps/ads/data/ads.json" "apps/ads/data/approvals.json" "apps/ads/menu.json" "apps/ads/home-boxes.js" "apps/ads/claude-jobs.json" "apps/ads/CLAUDE.md" "apps/ads/ATTACH-CLAUDE.md" "apps/ads/app/app.js" "apps/ads/app/app.css" "apps/ads/app/views.css" "apps/ads/app/model.js" "apps/ads/app/report.js" "apps/ads/app/components.js" "apps/ads/app/charts.js" "apps/ads/app/drawer.js" "apps/ads/app/media.js" "apps/ads/app/settings.js" "apps/ads/app/view-overview.js" "apps/ads/app/view-campaigns.js" "apps/ads/app/view-builds.js" "apps/ads/app/view-week.js" "apps/ads/app/view-health.js" "context/ads.md" "setup/progress.md" "setup/05-get-to-know-the-business.md" "setup/ads-01-install-claude-ads.md" "setup/ads-02-where-your-ads-are.md" "setup/ads-03-your-customer.md" "setup/ads-04-budget-and-results.md" "setup/ads-05-first-look.md" "setup/09-check-and-hand-over.md" "setup/scripts/install-claude-ads.sh" "setup/scripts/install-claude-ads.ps1" "setup/connections/meta-ads.md" "setup/connections/google-ads.md" "files/04-marketing/ads/README.md" "files/04-marketing/ads/exports/README.md" "skills-to-upload/README.md" ".claude/skills/README.md" ".claude/settings.json" ".claude/skills/build-a-campaign/references/campaign-basics.md" ".claude/skills/build-in-account/references/connections.md" ".claude/skills/build-in-account/references/google-ads-editor.md" ".claude/skills/update-my-ads/references/exports.md" "setup/scripts/save-key.sh" "setup/scripts/start-app.sh" "apps/server/server.js" "apps/server/server.py" "setup/connections/README.md" "toolkit.json" "ATTACHING.md" "apps/installed.json" "apps/shared/catalogue.json" "apps/shared/VERSION" "apps/shared/sidebar.css" "apps/shared/js/sidebar.js" "apps/shared/js/theme.js" "apps/shared/js/braindump.js" "apps/shared/js/connections.js" "apps/shared/js/connections-box.js" ".claude/skills/sort-brain-dump/SKILL.md" "apps/shared/images/claude-icon.png" "apps/home/index.html" "apps/home/home.js" "apps/home/home.css" "apps/shared/fonts/Figtree-Variable.woff2" "docs/CUSTOMISING.md" "docs/PRIVACY-AND-SAFETY.md" "setup/as-installed/README.md" ".claude/skills/get-updates/SKILL.md" ".claude/skills/open-the-app/SKILL.md" ".claude/skills/match-my-brand/SKILL.md"; do
   [ -e "$OUT/$f" ] || fail "missing $f"
 done
 for f in apps/ads/data/ads.json apps/ads/data/approvals.json apps/ads/menu.json apps/ads/claude-jobs.json toolkit.json apps/installed.json apps/shared/catalogue.json .claude/settings.json; do
   python3 -c 'import json,sys; json.load(open(sys.argv[1]))' "$OUT/$f" || fail "$f is not valid"
 done
-# A fresh download lists only Ads OS, and no test tool ever ships
-python3 -c 'import json,sys; t=json.load(open(sys.argv[1]))["tools"]; sys.exit(0 if [x["id"] for x in t]==["ads"] else 1)' "$OUT/apps/installed.json" || fail "apps/installed.json must list only Ads OS"
+# A fresh download lists only Agentic Ads, and no test tool ever ships
+python3 -c 'import json,sys; t=json.load(open(sys.argv[1]))["tools"]; sys.exit(0 if [x["id"] for x in t]==["ads"] else 1)' "$OUT/apps/installed.json" || fail "apps/installed.json must list only Agentic Ads"
 python3 -c 'import json,sys; t=json.load(open(sys.argv[1])); sys.exit(0 if t.get("id")=="ads" else 1)' "$OUT/toolkit.json" || fail "toolkit.json must have id ads"
 [ ! -e "$OUT/apps/test-tool" ] || fail "the test tool is in the release"
 # The data file must be listed, in both places that track it
@@ -325,8 +325,8 @@ HITS=$(found -EinH "$BANNED" "$OUT/README.md" "$OUT/START-HERE.md")
 [ -z "$HITS" ] || fail "a banned word is in README.md or START-HERE.md: $(printf '%s\n' "$HITS" | head -3)"
 # The old tool's name must not linger in anything this tool owns. (ATTACHING.md and apps/shared,
 # apps/home and apps/server are shared and may name other tools.) Every path is checked to exist first.
-OLD='content machine|content-machine|content\.json|apps/content|skill-map|skill map|skillmap|skill and folder map|skill-and-folder|Pipeline OS Licence|Vault|Ads Dashboard|ads-dashboard'
-OLD_PATHS=("$OUT/README.md" "$OUT/START-HERE.md" "$OUT/CLAUDE.md" "$OUT/LICENSE" "$OUT/toolkit.json" "$OUT/Open Ads OS.html" "$OUT/docs" "$OUT"/setup/*.md "$OUT/context" "$OUT/apps/ads" "$OUT/apps/installed.json" "$OUT/skills-to-upload" "$OUT/.claude/settings.json" "$OUT/.claude/skills/README.md")
+OLD='content machine|content-machine|content\.json|apps/content|skill-map|skill map|skillmap|skill and folder map|skill-and-folder|Agentic Pipeline Licence|Vault|Ads Dashboard|ads-dashboard'
+OLD_PATHS=("$OUT/README.md" "$OUT/START-HERE.md" "$OUT/CLAUDE.md" "$OUT/LICENSE" "$OUT/toolkit.json" "$OUT/Open Agentic Ads.html" "$OUT/docs" "$OUT"/setup/*.md "$OUT/context" "$OUT/apps/ads" "$OUT/apps/installed.json" "$OUT/skills-to-upload" "$OUT/.claude/settings.json" "$OUT/.claude/skills/README.md")
 for skill in setup update-my-ads build-a-campaign build-in-account analyse-campaign make-account-change how-did-the-ads-do what-should-i-change my-ads-check-in; do
   OLD_PATHS+=("$OUT/.claude/skills/$skill")
 done
@@ -373,6 +373,6 @@ SCREENEOF
 SKILLS=$(find "$OUT/.claude/skills" -name SKILL.md | wc -l | tr -d ' ')
 
 # ---------- 4. Zip (COPYFILE_DISABLE stops macOS adding hidden ._ files) ----------
-rm -f "$DIST/ads-os.zip"
-(cd "$STAGE" && COPYFILE_DISABLE=1 zip -rqX "$DIST/ads-os.zip" "$NAME")
-echo "Built dist/ads-os.zip ($(du -h "$DIST/ads-os.zip" | cut -f1 | tr -d ' '), $SKILLS skills)"
+rm -f "$DIST/agentic-ads.zip"
+(cd "$STAGE" && COPYFILE_DISABLE=1 zip -rqX "$DIST/agentic-ads.zip" "$NAME")
+echo "Built dist/agentic-ads.zip ($(du -h "$DIST/agentic-ads.zip" | cut -f1 | tr -d ' '), $SKILLS skills)"
