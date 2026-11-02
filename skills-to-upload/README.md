@@ -18,4 +18,4 @@ If the menus look different, ask Claude: "Where do I upload a skill?"
 |---|---|
 | (None yet. Claude adds a line here when you make one.) | |
 
-Your skills and their zips stay on your computer and never ship with Ads OS: they're about your business only.
+Your skills and their zips stay on your computer and never ship with Agentic Ads: they're about your business only.

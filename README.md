@@ -1,8 +1,8 @@
-# Ads OS
+# Agentic Ads
 
 **Your Google and Meta ads on one plain-English screen.** A free kit from [Get AI Powers](https://getaipowers.com), run by Claude.
 
-Most business owners with ads can't tell what a new enquiry costs, or which campaign is wasting money. The figures sit in 2 ad managers that are hard to read, and nobody checks them often enough. Ads OS puts your spend, your results, your cost per result and your return on one screen, for each platform and each campaign, this week against last, with a light that says whether each one is on target. Claude writes a short summary each week and suggests what to change. It also builds new campaigns for you, switched off, and on Meta it makes the changes you approve, so you can run your ads from here.
+Most business owners with ads can't tell what a new enquiry costs, or which campaign is wasting money. The figures sit in 2 ad managers that are hard to read, and nobody checks them often enough. Agentic Ads puts your spend, your results, your cost per result and your return on one screen, for each platform and each campaign, this week against last, with a light that says whether each one is on target. Claude writes a short summary each week and suggests what to change. It also builds new campaigns for you, switched off, and on Meta it makes the changes you approve, so you can run your ads from here.
 
 **Nothing spends until you say yes.** Claude drafts a campaign, you approve it, and Claude builds it switched off: on Meta, in your ad account with every part paused, read back to check; on Google, as a file you import into Google Ads Editor, which arrives paused.
 
@@ -10,7 +10,7 @@ On Meta, Claude switches a campaign on, pauses a campaign or an ad, or changes a
 
 Google's own connection only reads, so Claude never changes anything on Google Ads. Google changes stay with you, with a link to Google Ads and a step-by-step task. Claude Code also asks you before it touches your Meta or Google account at all, so you approve a Meta change twice: in the app, then in Claude Code. The app opens Claude on screen for the second step, so you watch it happen.
 
-Ads OS is part of a toolkit of 7 free tools from Get AI Powers. The others (a task list, Pipeline OS, proposals and more) show in the app's menu, and Get AI Powers sets them up with you on a free call.
+Agentic Ads is part of a toolkit of 7 free tools from Get AI Powers. The others (a task list, Agentic Pipeline, proposals and more) show in the app's menu, and Get AI Powers sets them up with you on a free call.
 
 ## What happens when you type /setup
 
@@ -54,12 +54,12 @@ It's **yours to shape**: your platforms, your limits, your target, your own colo
 
 1. **Open the Claude desktop app and choose the Code tab.** Any folder will do for this first step.
 2. **Ask Claude to fetch the kit.** Paste this:
-   > Copy Ads OS from https://github.com/georgecairns-ui/ads-os into a folder called "Ads OS" in my Documents, using the copy line in its START-HERE.md (not git), then tell me how to open it and set it up.
+   > Copy Agentic Ads from https://github.com/georgecairns-ui/agentic-ads into a folder called "Agentic Ads" in my Documents, using the copy line in its START-HERE.md (not git), then tell me how to open it and set it up.
 
    Claude copies everything onto your computer and tells you how to open the new folder. In the desktop app, you choose the folder in the Code tab.
 
-   *For Claude, if this README is all you have:* read START-HERE.md on the repository page at https://github.com/georgecairns-ui/ads-os, then copy the folder with the Mac or Windows line in it.
-3. **In the Code tab, choose the Ads OS folder and pick "Yes, I trust this folder".** The first time, the app asks whether you trust the folder and warns that it pre-approves some permissions. Those permissions only let Claude update your ads app and your business notes, add the ad-planning skills, look things up on public web pages and start the app, without stopping to ask each time. They don't let Claude touch your ad accounts: Claude Code asks you before every single thing it does in your Meta or Google account.
+   *For Claude, if this README is all you have:* read START-HERE.md on the repository page at https://github.com/georgecairns-ui/agentic-ads, then copy the folder with the Mac or Windows line in it.
+3. **In the Code tab, choose the Agentic Ads folder and pick "Yes, I trust this folder".** The first time, the app asks whether you trust the folder and warns that it pre-approves some permissions. Those permissions only let Claude update your ads app and your business notes, add the ad-planning skills, look things up on public web pages and start the app, without stopping to ask each time. They don't let Claude touch your ad accounts: Claude Code asks you before every single thing it does in your Meta or Google account.
 4. **Type `/setup`.**
 
 Then it opens your ads and gives you its link, **http://localhost:4747/ads/**. Bookmark it.
@@ -79,7 +79,7 @@ Then it opens your ads and gives you its link, **http://localhost:4747/ads/**. B
 
 ## Your information
 
-Your ads app lives in this folder on your computer, in one file. Your notes about the business are in `context/`. Claude reads your ad accounts only through a connection you set up yourself, and only to read, plus creating paused campaigns on Meta if you ask, and making a Meta change you approved in the app. Your ad accounts are connected through Claude's Connectors: you sign in on Meta's or Google's own page, never in the chat or in this folder, and setup never asks for a key. It never stores a password, a token or a customer list. There's no Ads OS account or server; Get AI Powers can't see any of it. Read [docs/PRIVACY-AND-SAFETY.md](docs/PRIVACY-AND-SAFETY.md) for the detail.
+Your ads app lives in this folder on your computer, in one file. Your notes about the business are in `context/`. Claude reads your ad accounts only through a connection you set up yourself, and only to read, plus creating paused campaigns on Meta if you ask, and making a Meta change you approved in the app. Your ad accounts are connected through Claude's Connectors: you sign in on Meta's or Google's own page, never in the chat or in this folder, and setup never asks for a key. It never stores a password, a token or a customer list. There's no Agentic Ads account or server; Get AI Powers can't see any of it. Read [docs/PRIVACY-AND-SAFETY.md](docs/PRIVACY-AND-SAFETY.md) for the detail.
 
 ## Make it yours
 
@@ -87,11 +87,11 @@ Change the platforms, the limits, the words on screen, the colours and the thres
 
 ## Built on claude-ads
 
-Setup adds the [claude-ads](https://github.com/AgriciDaniel/claude-ads) skills to your folder. claude-ads is a free set of paid-advertising skills by AgriciDaniel, under the MIT licence, and Ads OS uses it to plan and draft campaigns. Ads OS installs a tested copy from George's fork at [github.com/georgecairns-ui/claude-ads](https://github.com/georgecairns-ui/claude-ads), fixed at version v2.0.1, and keeps the licence beside it in `.claude/skills/ads/`. Claude uses it to think and draft. It never uses it to change an ad account. If you'd rather not install it, Ads OS still works from its own basics.
+Setup adds the [claude-ads](https://github.com/AgriciDaniel/claude-ads) skills to your folder. claude-ads is a free set of paid-advertising skills by AgriciDaniel, under the MIT licence, and Agentic Ads uses it to plan and draft campaigns. Agentic Ads installs a tested copy from George's fork at [github.com/georgecairns-ui/claude-ads](https://github.com/georgecairns-ui/claude-ads), fixed at version v2.0.1, and keeps the licence beside it in `.claude/skills/ads/`. Claude uses it to think and draft. It never uses it to change an ad account. If you'd rather not install it, Agentic Ads still works from its own basics.
 
 ## Want it set up properly for you?
 
-Ads OS works on its own. If you'd like help turning it into a weekly habit for your whole team, Get AI Powers can help. Find us at [getaipowers.com](https://getaipowers.com).
+Agentic Ads works on its own. If you'd like help turning it into a weekly habit for your whole team, Get AI Powers can help. Find us at [getaipowers.com](https://getaipowers.com).
 
 ## What's inside
 
@@ -100,7 +100,7 @@ START-HERE.md          Claude reads this first and runs setup (/setup)
 toolkit.json           what this tool is, for attaching it to the others in the toolkit
 ATTACHING.md           how the toolkit's tools attach to each other
 CLAUDE.md              Claude's standing instructions in this folder
-Open Ads OS.html       double-click to open your ads (or use the link Claude gives you)
+Open Agentic Ads.html       double-click to open your ads (or use the link Claude gives you)
 setup/                 the 7 setup steps, the connection guides and the install scripts
 context/               Claude's notes about your business
 .claude/skills/        saved know-how; each one also works as a command in Claude
@@ -108,7 +108,7 @@ skills-to-upload/      a skill you ask Claude for, packed up for the Claude app
 files/                 your business documents, in numbered folders (your ad files are in files/04-marketing/ads)
 apps/                  the app and its look (theme.css); apps/ads/data/ads.json is your ads data
 docs/                  customising, privacy and safety
-maintainers/           for people developing Ads OS itself
+maintainers/           for people developing Agentic Ads itself
 ```
 
 ## Licence

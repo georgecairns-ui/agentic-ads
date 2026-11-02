@@ -2,7 +2,7 @@
 
 Status: not filled in yet
 
-<!-- Claude: fill in "Your setup" during setup step 1 (setup/05-get-to-know-the-business.md). Ads OS can connect to Meta and Google Ads (setup step 3). Record each connection here, with what Claude may do in it: read, and for Meta create campaigns that are paused and make one change the owner approved in the app (switch on, pause, daily budget). Never anything on its own, over their limits, on Google, or that deletes. Never write passwords, keys or codes in this file or anywhere in this folder. -->
+<!-- Claude: fill in "Your setup" during setup step 1 (setup/05-get-to-know-the-business.md). Agentic Ads can connect to Meta and Google Ads (setup step 3). Record each connection here, with what Claude may do in it: read, and for Meta create campaigns that are paused and make one change the owner approved in the app (switch on, pause, daily budget). Never anything on its own, over their limits, on Google, or that deletes. Never write passwords, keys or codes in this file or anywhere in this folder. -->
 
 ## Your setup
 

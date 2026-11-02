@@ -26,8 +26,8 @@ Use `.claude/skills/connect-a-tool/SKILL.md` for the general method (find the ro
 | Notion | Notes and project trackers in People and Review | Claude connector | `notion.md` |
 | Stripe | Payments to follow up on and failed charges in Review | Claude connector (Stripe's own sign-in) | `stripe.md` |
 | Calendly | Upcoming bookings in Calendar and People | Claude connector | `calendly.md` |
-| Meta Ads | Ad figures for Ads OS, new campaigns built switched off, and changes you approve in the app (Ads OS only) | Meta's own connection (open beta); a downloaded report where there's no connector | `meta-ads.md` |
-| Google Ads | Ad figures for Ads OS (read only; Ads OS writes an import file for new campaigns, and Google changes stay with you) | Google's own connection; a downloaded report where there's no connector | `google-ads.md` |
+| Meta Ads | Ad figures for Agentic Ads, new campaigns built switched off, and changes you approve in the app (Agentic Ads only) | Meta's own connection (open beta); a downloaded report where there's no connector | `meta-ads.md` |
+| Google Ads | Ad figures for Agentic Ads (read only; Agentic Ads writes an import file for new campaigns, and Google changes stay with you) | Google's own connection; a downloaded report where there's no connector | `google-ads.md` |
 
 Default for every app: read, and prepare drafts where the app allows. Claude never sends, pays, deletes, posts, cancels or changes anything on the person's behalf unless they ask for that one specific action in that conversation. Record every connection once a real read has worked (see "Recording a connection" below).
 

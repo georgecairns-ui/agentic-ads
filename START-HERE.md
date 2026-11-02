@@ -4,11 +4,11 @@
 
 ---
 
-**Claude, this file is for you.** The person you work for has copied Ads OS onto their computer and wants it set up.
+**Claude, this file is for you.** The person you work for has copied Agentic Ads onto their computer and wants it set up.
 
-**If you've only just copied it for them** (you're running in a different folder, such as their home or Documents folder): setup must run from inside the Ads OS folder, because that's where your skills, permissions and the ads app live. Copy it as a plain folder, so it's theirs alone and not linked to the copy online. Use the line for their computer:
-  - Mac: `D="$HOME/Documents/Ads OS"; mkdir -p "$D/setup/as-installed" && curl -fsSL -o "$D/setup/as-installed/ads-os.tar.gz" https://github.com/georgecairns-ui/ads-os/archive/refs/heads/main.tar.gz && tar -xzf "$D/setup/as-installed/ads-os.tar.gz" --strip-components 1 -C "$D"`
-  - Windows (PowerShell): `$d = "$HOME\Documents\Ads OS"; New-Item -ItemType Directory -Force "$d\setup\as-installed" | Out-Null; curl.exe -fsSL -o "$d\setup\as-installed\ads-os.tar.gz" https://github.com/georgecairns-ui/ads-os/archive/refs/heads/main.tar.gz; if ($LASTEXITCODE -eq 0) { tar -xzf "$d\setup\as-installed\ads-os.tar.gz" --strip-components 1 -C "$d" }`
+**If you've only just copied it for them** (you're running in a different folder, such as their home or Documents folder): setup must run from inside the Agentic Ads folder, because that's where your skills, permissions and the ads app live. Copy it as a plain folder, so it's theirs alone and not linked to the copy online. Use the line for their computer:
+  - Mac: `D="$HOME/Documents/Agentic Ads"; mkdir -p "$D/setup/as-installed" && curl -fsSL -o "$D/setup/as-installed/agentic-ads.tar.gz" https://github.com/georgecairns-ui/agentic-ads/archive/refs/heads/main.tar.gz && tar -xzf "$D/setup/as-installed/agentic-ads.tar.gz" --strip-components 1 -C "$D"`
+  - Windows (PowerShell): `$d = "$HOME\Documents\Agentic Ads"; New-Item -ItemType Directory -Force "$d\setup\as-installed" | Out-Null; curl.exe -fsSL -o "$d\setup\as-installed\agentic-ads.tar.gz" https://github.com/georgecairns-ui/agentic-ads/archive/refs/heads/main.tar.gz; if ($LASTEXITCODE -eq 0) { tar -xzf "$d\setup\as-installed\agentic-ads.tar.gz" --strip-components 1 -C "$d" }`
 
   If the download fails, check their internet connection and run the line again. Don't try another way in.
 
@@ -16,7 +16,7 @@
 
   If you've already copied it another way (for example with `git clone`, or into a different folder), that's fine: use that folder. Then give them the steps to open it: in the Claude desktop app, open the Code tab, choose that folder, pick "Yes, I trust this folder", then type `/setup`. Stop there; don't start the setup from the wrong folder. Follow this file, then the step files in `setup/`, in order.
 
-## What Ads OS is
+## What Agentic Ads is
 
 Your Google and Meta ads on one plain-English screen, run by you: spend, results, cost per result and return, by platform and campaign, this week against last, with a weekly summary and suggestions. You also draft new campaigns for them. They approve a campaign, you build it switched off, and on Meta, when they press the button in the app and confirm, you switch it on.
 
@@ -73,7 +73,7 @@ These don't bend, whatever is asked later.
 - **Never act on your own, never delete, never touch Google.** Google's connection only reads. Nothing in an ad account changes without their approval in the app, and you never delete anything.
 - **Read back and confirm.** After you create anything in an account, read it back and check every part is paused. If any part isn't, stop and tell them.
 - **No ad account tool is pre-approved.** Claude Code asks before each call to Meta or Google, so they approve a change twice: in the app, then in Claude Code. After their yes in the app, the app opens Claude Code on screen with the job typed in, so they see Claude Code's own question before each Meta call. Say what you're about to do first.
-- **No passwords, tokens or customer lists in chat or in this folder.** People sign in on Meta's and Google's own screens, through Claude's Connectors, and the connection keeps the sign-in. Setup never uses keys. (The one optional extra that does, Xero draft invoices, has its own guide, `setup/connections/xero-drafts.md`, which comes with Money View OS and the Small Business Toolkit. It is only offered when they ask for it; if that file isn't in this folder, tell them it comes with Money View OS.)
+- **No passwords, tokens or customer lists in chat or in this folder.** People sign in on Meta's and Google's own screens, through Claude's Connectors, and the connection keeps the sign-in. Setup never uses keys. (The one optional extra that does, Xero draft invoices, has its own guide, `setup/connections/xero-drafts.md`, which comes with Agentic Money View and the Agentic Command Centre. It is only offered when they ask for it; if that file isn't in this folder, tell them it comes with Agentic Money View.)
 - **Never type a total.** The app works out every sum from the raw figures.
 - **Never invent proof.** No made-up results, reviews, prices or offers.
 - **Their limits are limits.** Never draft a campaign that takes them over what they said they'd spend.

@@ -2,7 +2,7 @@
   "tools": [
     {
       "id": "ads",
-      "name": "Ads OS",
+      "name": "Agentic Ads",
       "app": "apps/ads/",
       "media": true,
       "dataFiles": [
