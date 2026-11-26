@@ -4,7 +4,9 @@ Goal: a short, accurate note in `context/business.md` so every ad you draft soun
 
 ## 1. Ask, in one message
 
-Say why in one line, then ask up to 3 questions:
+First, follow `setup/first-questions.md`: the talking tip, the first questions (their computer, Claude plan, where their files are, what they already use, and their goal), then look for what you need yourself and show them what you found. Then ask the questions below, leaving out everything that already answered.
+
+Start from what you found and they confirmed in `setup/first-questions.md` (section 3), and their goal in `context/goal.md`: don't ask for any of it again. Say why in one line, then ask up to 3 questions, only the ones still unanswered:
 
 > So your ads sound like you, a couple of quick questions. What does the business do, and for whom? What do you spend most of your week on? And have you got a website?
 
@@ -17,7 +19,7 @@ If you can read web pages, read it first and work out what the business does and
 ## 3. Fill in the notes
 
 - `context/business.md`: what the business does, who for, website, and anything else they mentioned. Change its status line to `Status: filled in on <date>`.
-- `context/priorities.md`: only if they volunteer what matters most right now, without you asking for it separately. Change its status line to `Status: filled in on <date>`.
+- `context/priorities.md`: only if they volunteer what matters most right now, without you asking for it separately, in the light of their goal. Change its status line to `Status: filled in on <date>`.
 
 ## 4. Make the app look like their business
 
