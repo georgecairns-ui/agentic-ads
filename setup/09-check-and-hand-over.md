@@ -13,15 +13,17 @@ Check these yourself. Fix anything that fails, then check again.
 - [ ] This week shows the summary and the suggestions. To do lists what they need to do and what Claude can do.
 - [ ] **Refresh figures**, **New campaign** and the other Claude buttons can ask Claude to run a job. It needs Claude Code installed on this computer; if it isn't, the app says to ask Claude instead, rather than failing quietly.
 - [ ] The app looks right in both light and dark (the moon or sun button at the top).
-- [ ] Every platform they use has a row in `apps/home/data/connections.json` (`meta-ads`, `google-ads`) in a final status: `connected` with a `checked` date from this setup, `export-only` (no connector for them, so a report), `needs-attention` (with what went wrong in `note`) or `not-connected` with the note "Chose not to connect yet". A platform they don't use is `not-used`. No platform they use is missing.
+- [ ] Every platform they use has a row in `apps/home/data/connections.json` (`meta-ads`, `google-ads`) in a final status: `connected` with a `checked` date from this setup, `export-only` (no connector for them, so a report), `waiting` (with `waitingOn` and the one thing still to do in `note`), `needs-attention` (with what went wrong in `note`) or `not-connected` with the note "Chose not to connect yet". A platform they don't use is `not-used`. No platform they use is missing.
+- [ ] Anything they already use from step 1 that went on the list in step 3 has a row too: `connected`, `export-only`, `no-connector`, `waiting` or `needs-attention`.
 - [ ] Home shows the Connections box, with the same platforms and statuses as the file.
+- [ ] `context/goal.md` has their goal with the numbers.
 - [ ] `.claude/settings.json` still allows no ad account tool: no Meta or Google tool is pre-approved, and nothing in `.claude/settings.local.json` pre-approves one either.
 - [ ] Nothing was switched on, edited, paused, re-budgeted or deleted in any ad account unless the owner pressed the button in the app and confirmed that exact change. If a campaign was built on Meta, you read it back and every part of it is paused. Nothing was changed on Google.
 - [ ] Nothing secret (a password, a token, a customer list) is anywhere in this folder, and none was typed into the chat.
 
 ## 2. Hand over
 
-Give them a plain summary with real numbers from their own account, never an example. For instance:
+Start with their goal, in one line: what they want to achieve (from `context/goal.md`) and that everything here is set up to help with it. Then give them a plain summary with real numbers from their own account, never an example. For instance:
 
 > Here's where you are. Your Meta account is connected, and I read it today. There's no Claude connector for your Google Ads account yet, so Google comes from the report you downloaded. Your cost per enquiry is £22 against your £25 target, so you're on track, and you've used £310 of your £600 this month. I've drafted a campaign called "New patient check-up, autumn": it's waiting for your Approve in New campaigns, and nothing in your account has changed.
 
@@ -37,6 +39,13 @@ Then tell them, briefly:
 - That Google and Meta count a result differently, so each is judged against its own target.
 - That they can say "get the latest version" any time and you will bring the app up to date, keeping everything of theirs.
 - Their link, **http://localhost:4747/ads/**. Bookmark it.
+
+Then, each in a line or two:
+
+- **Anything still waiting.** List every `waiting` connection with the one thing to do next: "Meta Ads is waiting on your IT team to approve it. When they have, press Finish connecting on Home, or tell me, and I'll read its figures then."
+- **Files you said you'd share.** List any still `to find` in `setup/progress.md`, by name.
+- **Joining up the rest.** If anything is `no-connector` or `export-only`, say once: "Want these joined up with something you already use? Book a call with Joey or George," with the booking link from `apps/shared/catalogue.json`. The Connections box on Home has the same link.
+- **The 10-minute lesson.** Offer the "how to use Claude day to day" lesson from `setup/learn-as-you-go.md`, in every guide mode. If they say no, tell them they can say "show me how to use Claude" any time.
 
 ## 3. No scheduled run
 
