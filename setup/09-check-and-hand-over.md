@@ -44,7 +44,7 @@ Then, each in a line or two:
 
 - **Anything still waiting.** List every `waiting` connection with the one thing to do next: "Meta Ads is waiting on your IT team to approve it. When they have, press Finish connecting on Home, or tell me, and I'll read its figures then."
 - **Files you said you'd share.** List any still `to find` in `setup/progress.md`, by name.
-- **Joining up the rest.** If anything is `no-connector` or `export-only`, say once: "Want these joined up with something you already use? Book a call with Joey or George," with the booking link from `apps/shared/catalogue.json`. The Connections box on Home has the same link next to each one.
+- **Joining up the rest.** If anything is `no-connector` or `export-only`, say once: "Want these joined up with something you already use? Book a call with Joey or George," with the booking link from `apps/shared/catalogue.json`. The Connections box on Home has the same link.
 - **The 10-minute lesson.** Offer the "how to use Claude day to day" lesson from `setup/learn-as-you-go.md`, in every guide mode. If they say no, tell them they can say "show me how to use Claude" any time.
 
 ## 3. No scheduled run
